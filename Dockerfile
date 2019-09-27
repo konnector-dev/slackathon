@@ -1,5 +1,5 @@
 
-FROM jdecode/kode:0.2
+FROM jdecode/kode:0.3
 
 #RUN curl -sSO https://dl.google.com/cloudagents/install-monitoring-agent.sh
 #RUN bash install-monitoring-agent.sh
