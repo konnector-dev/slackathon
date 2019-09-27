@@ -12,6 +12,8 @@ steps:
     'NR_INSTALL_NOKSH=${_NR_INSTALL_NOKSH}',
     '--build-arg',
     'NR_INSTALL_KEY=${_NR_INSTALL_KEY}',
+    '--build-arg',
+    '_APP_KEY=${_APP_KEY}'
     ]
   # push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
