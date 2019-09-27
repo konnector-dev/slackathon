@@ -14,6 +14,9 @@ FROM jdecode/kode:0.2
 
 #RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 
+ARG _APP_KEY
+ENV APP_KEY=${_APP_KEY}
+
 RUN git pull origin master
 RUN chown -R www-data:www-data storage bootstrap
 RUN composer install -n --prefer-dist
