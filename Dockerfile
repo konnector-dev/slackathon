@@ -22,3 +22,4 @@ ENV APP_KEY=${_APP_KEY}
 RUN git pull origin master
 RUN chown -R www-data:www-data storage bootstrap
 RUN composer install -n --prefer-dist
+
