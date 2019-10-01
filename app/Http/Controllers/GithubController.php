@@ -118,6 +118,15 @@ class GithubController extends Controller
         return $this->curlGithub();
     }
 
+    public function getSingleCommit(Request $request)
+    {
+        $this->requestData = $request->all();
+        $this->accessTokenChecker($this->requestData);
+        $this->curlGithubToken = $this->requestData['access_token'];
+        $this->curlGithubUrl = "https://api.github.com/repos/{$this->owner}/{$this->repo}/commits/{$this->requestData['commit-sha']}";
+        return $this->curlGithub();
+    }
+
     public function setPushHooks(Request $request)
     {
         $this->requestData = $request->all();
