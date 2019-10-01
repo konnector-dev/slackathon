@@ -22,5 +22,6 @@ Route::get('/github/get-user-installations', 'GithubController@getUserInstallati
 Route::get('/github/get-user-repos', 'GithubController@getUserRepos');
 Route::get('/github/get-owner-repo', 'GithubController@getOwnerRepo');
 Route::get('/github/get-repo-pulls', 'GithubController@getRepoPulls');
+Route::get('/github/set-push-hooks', 'GithubController@setPushHooks');
 
 //Route::get('/github/get-commits', 'GithubController@getCommits');

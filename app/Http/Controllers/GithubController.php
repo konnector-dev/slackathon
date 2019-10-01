@@ -10,6 +10,7 @@ class GithubController extends Controller
     private $curlGithubUrl = '';
     private $curlGithubToken = '';
     private $curlGithubHeaders = [];
+    private $curlGithubPostdata = [];
 
     public function __construct()
     {
@@ -37,16 +38,9 @@ class GithubController extends Controller
                 'redirect_uri' => env('GITHUB_REDIRECT_URI'),
                 'state' => $this->hashBabyHash
             ];
-            $url = 'https://github.com/login/oauth/access_token';
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_POST, 1);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $postvars);
-
-            $output = curl_exec($ch);
-            curl_close($ch);
+            $this->curlGithubUrl = 'https://github.com/login/oauth/access_token';
+            $this->setCurlGithubPost($postvars);
+            $output = $this->curlGithub();
             return redirect(url('/github/get-user-info?') . $output);
         }
 
@@ -56,7 +50,7 @@ class GithubController extends Controller
     public function getUserInfo(Request $request)
     {
         $rdata = $request->all();
-        if (strlen($rdata['access_token'])) {
+        if (isset($rdata['access_token']) && strlen($rdata['access_token'])) {
             $this->curlGithubToken = $rdata['access_token'];
             $this->curlGithubUrl = 'https://api.github.com/user';
             return $this->curlGithub();
@@ -107,6 +101,34 @@ class GithubController extends Controller
         }
     }
 
+    public function setPushHooks(Request $request)
+    {
+        $rdata = $request->all();
+        if (strlen($rdata['access_token'])) {
+            $this->curlGithubToken = $rdata['access_token'];
+            $this->curlGithubUrl = 'https://api.github.com/repos/konnector-dev/kode/hooks';
+            $this->setCurlGithubHeaders('Accept: application/vnd.github.shadow-cat-preview+json');
+            $postvars = [
+                'name' => 'web',
+                'config' => [
+                    'url' => 'https://wooks.konnector.dev/post?type=kode-github-qaing',
+                    'content_type' => 'json',
+                    'insecure_ssl' => 0
+                ],
+                'events' => [
+                    'push',
+                    'status',
+                    'pull_request_review',
+                    'pull_request_review_comment',
+                    'pull_request'
+                ],
+                'active' => true
+            ];
+            $this->setCurlGithubPost($postvars);
+            return $this->curlGithub();
+        }
+    }
+
     public function getCommits(Request $request)
     {
         //
@@ -119,6 +141,10 @@ class GithubController extends Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->getCurlGithubHeaders());
+        if (count($this->curlGithubPostdata)) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($this->curlGithubPostdata));
+        }
         $output = curl_exec($ch);
         curl_close($ch);
         return $output;
@@ -127,6 +153,15 @@ class GithubController extends Controller
     private function setCurlGithubHeaders(String $header)
     {
         $this->curlGithubHeaders[] = $header;
+    }
+
+    private function setCurlGithubPost(array $postvars)
+    {
+        if (!count($this->curlGithubPostdata)) {
+            $this->curlGithubPostdata = $postvars;
+            return;
+        }
+        $this->curlGithubPostdata[] = $postvars;
     }
 
     /**
