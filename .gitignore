@@ -13,5 +13,4 @@ yarn-error.log
 /storege
 /.history
 docker-compose.yml
-storage
-
+/storage
