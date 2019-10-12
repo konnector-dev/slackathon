@@ -5,16 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title><?php echo env('APP_NAME', 'Kode'); ?></title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link href="{{ url('/assets/fonts/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <style>
         html,
         body {
-            background-color: #fff;
+            background-color: #060606;
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
@@ -84,18 +85,17 @@
 
         <div class="content">
             <div class="title m-b-md">
-                <?php echo env('APP_NAME', 'Laravel'); ?>
+                <?php echo env('APP_NAME', 'Kode'); ?>
             </div>
 
             <div class="links">
-                <a href="https://laravel.com/docs">Docs</a>
-                <a href="https://laracasts.com">Laracasts</a>
-                <a href="https://laravel-news.com">News</a>
-                <a href="https://blog.laravel.com">Blog</a>
-                <a href="https://nova.laravel.com">Nova</a>
-                <a href="https://forge.laravel.com">Forge</a>
-                <a href="https://vapor.laravel.com">Vapor</a>
-                <a href="https://github.com/laravel/laravel">GitHub</a>
+                <a href="{{ url('/login') }}">Login</a>
+                <a href="https://github.com/konnector-dev/kuotes/tree/flutter-dart-app" target="_blank">Kuotes (Flutter)</a>
+                <a href="https://github.com/konnector-dev/kloudify/tree/wooks" target="_blank">Wooks(Laravel)</a>
+                <a href="https://github.com/jdecode" target="_blank"><i class="fa fa-github"></i>/jdecode</a>
+                <a href="https://twitter.com/jdecode" target="_blank"><i class="fa fa-twitter"></i>/jdecode</a>
+                <br />
+                <a href="" onclick="return false;" style="cursor: auto;">&copy; <?php echo date('Y'); ?></a>
             </div>
         </div>
     </div>

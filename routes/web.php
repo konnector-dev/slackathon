@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', 'PagesController@login');
+
 Route::get('/github/auth-request', 'GithubController@sendToGithubAuth');
 Route::get('/github/auth', 'GithubController@getAccessTokenFromCode');
 Route::get('/github/get-user-info', 'GithubController@getUserInfo');
