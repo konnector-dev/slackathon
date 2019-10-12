@@ -11,7 +11,7 @@
             style="text-align: center;">
             <a 
                 class="d-flex flex-row align-items-center social-login-link" 
-                href="{{ url('/oauth-github/auth-request') }}"
+                href="{{ secure_url('/oauth-github/auth-request') }}"
                 style="
                     width: 50%;
                     text-align: center;

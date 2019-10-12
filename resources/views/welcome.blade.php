@@ -9,7 +9,7 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link href="<?php echo url('/assets/fonts/font-awesome.min.css') ?>" rel="stylesheet">
+    <link href="{{ secure_url('/assets/fonts/font-awesome.min.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <style>
@@ -72,7 +72,7 @@
         @if (Route::has('login'))
         <div class="top-right links">
             @auth
-            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ secure_url('/home') }}">Home</a>
             @else
             <a href="{{ route('login') }}">Login</a>
 
@@ -89,7 +89,7 @@
             </div>
 
             <div class="links">
-                <a href="<?php echo url('/login') ?>">Login</a>
+                <a href="{{ secure_url('/login') }}">Login</a>
                 <a href="https://github.com/konnector-dev/kuotes/tree/flutter-dart-app" target="_blank">Kuotes (Flutter)</a>
                 <a href="https://github.com/konnector-dev/kloudify/tree/wooks" target="_blank">Wooks(Laravel)</a>
                 <a href="https://github.com/jdecode" target="_blank"><i class="fa fa-github"></i>/jdecode</a>
