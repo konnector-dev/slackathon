@@ -9,8 +9,18 @@
         <div 
             class="fb-login box-shadow"
             style="text-align: center;">
-            <a class="d-flex flex-row align-items-center social-login-link" href="#" style="width: 50%;text-align: center;margin-left: 25%;background-color: rgb(237,102,63);border-radius: 8px;box-shadow: 1px 5px 10px rgba(0,0,0,0.5);">
-            <i class="fa fa-github" style="margin-left:0px;padding-right:20px;padding-left:22px;width:56px;"></i>&nbsp; Login with GitHub
+            <a 
+                class="d-flex flex-row align-items-center social-login-link" 
+                href="{{ url('/oauth-github/auth-request') }}"
+                style="
+                    width: 50%;
+                    text-align: center;
+                    margin-left: 25%;
+                    background-color: rgb(237,102,63);
+                    border-radius: 8px;
+                    box-shadow: 1px 5px 10px rgba(0,0,0,0.5);">
+                    <i class="fa fa-github" style="margin-left:0px;padding-right:20px;padding-left:22px;width:56px;"></i>
+                    &nbsp; Login with GitHub
             </a>
         </div>
         <div class="gp-login box-shadow"></div>
