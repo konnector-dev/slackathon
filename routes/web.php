@@ -17,6 +17,11 @@ Route::get('/', function () {
 
 Route::get('/login', 'PagesController@login');
 
+/**
+ * Github App Auth URLs (probably not going to be used)
+ */
+
+/*
 Route::get('/github/auth-request', 'GithubController@sendToGithubAuth');
 Route::get('/github/auth', 'GithubController@getAccessTokenFromCode');
 Route::get('/github/get-user-info', 'GithubController@getUserInfo');
@@ -27,3 +32,18 @@ Route::get('/github/get-repo-pulls', 'GithubController@getRepoPulls');
 Route::get('/github/set-push-hooks', 'GithubController@setPushHooks');
 Route::get('/github/get-commits', 'GithubController@getCommits');
 Route::get('/github/get-single-commit', 'GithubController@getSingleCommit');
+*/
+/**
+ * Github OAuth App Auth URLs
+ */
+
+Route::get('/oauth-github/auth-request', 'OauthGithubController@sendToGithubAuth');
+Route::get('/oauth-github/auth', 'OauthGithubController@getAccessTokenFromCode');
+Route::get('/oauth-github/get-user-info', 'OauthGithubController@getUserInfo');
+Route::get('/oauth-github/get-user-installations', 'OauthGithubController@getUserInstallations');
+Route::get('/oauth-github/get-user-repos', 'OauthGithubController@getUserRepos');
+Route::get('/oauth-github/get-owner-repo', 'OauthGithubController@getOwnerRepo');
+Route::get('/oauth-github/get-repo-pulls', 'OauthGithubController@getRepoPulls');
+Route::get('/oauth-github/set-push-hooks', 'OauthGithubController@setPushHooks');
+Route::get('/oauth-github/get-commits', 'OauthGithubController@getCommits');
+Route::get('/oauth-github/get-single-commit', 'OauthGithubController@getSingleCommit');
