@@ -110,7 +110,7 @@ class OauthGithubController extends Controller
 
     public function getUserRepos(Request $request)
     {
-        $_repos = $this->http->request(
+        return $this->http->request(
             'GET',
             "https://api.github.com/user/repos",
             [
@@ -120,19 +120,11 @@ class OauthGithubController extends Controller
                 ]
             ]
         )->getBody();
-        $repos = [];
-        $_repos = json_decode($_repos, true);
-        if(!empty($_repos) && is_array($_repos)) {
-            foreach($_repos as $_repo) {
-                $repos[$_repo['owner']['login']][] = $_repo['name'];
-            }
-        }
-        return view('dark.dashboard', ['repos' => $repos]);
     }
 
     public function getUserOrgs(Request $request)
     {
-        $_orgs = $this->http->request(
+        return $this->http->request(
             'GET',
             "https://api.github.com/user/orgs",
             [
@@ -142,14 +134,6 @@ class OauthGithubController extends Controller
                 ]
             ]
         )->getBody();
-        $orgs = [];
-        $_orgs = json_decode($_orgs, true);
-        if(!empty($_orgs) && is_array($_orgs)) {
-            foreach($_orgs as $_org) {
-                $orgs[$_org['login']][] = $_org['avatar_url'];
-            }
-        }
-        return view('dark.dashboard', ['orgs' => $orgs]);
     }
 
     public function getOwnerRepo(Request $request)

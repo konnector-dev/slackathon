@@ -49,5 +49,5 @@ Route::get('/oauth-github/set-push-hooks', 'OauthGithubController@setPushHooks')
 Route::get('/oauth-github/get-commits', 'OauthGithubController@getCommits');
 Route::get('/oauth-github/get-single-commit', 'OauthGithubController@getSingleCommit');
 
-Route::get('/dashboard-raw', 'UsersController@dashboard');
-Route::get('/dashboard', 'OauthGithubController@getUserOrgs');
+Route::get('/dashboard', 'UsersController@dashboard');
+Route::get('/dashboard-bad', 'OauthGithubController@getUserOrgs');

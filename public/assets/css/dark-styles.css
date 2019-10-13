@@ -2,3 +2,13 @@ body {
     background-color: #1e2226;
     font-family: Ubuntu, sans-serif;
 }
+
+.navbar-brand {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: 1rem;
+}
+
+.dropdown-toggle::after {
+    content: none;
+}
