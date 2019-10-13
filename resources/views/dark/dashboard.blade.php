@@ -33,7 +33,7 @@
     </div>
     <div class="row">
         <pre class="text-white">
-        {{ print_r($repos) }}
+        {{ print_r($orgs) }}
         </pre>
     </div>
 </div>

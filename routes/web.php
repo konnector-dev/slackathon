@@ -42,6 +42,7 @@ Route::get('/oauth-github/auth', 'OauthGithubController@getAccessTokenFromCode')
 Route::get('/oauth-github/get-user-info', 'OauthGithubController@getUserInfo');
 Route::get('/oauth-github/get-user-installations', 'OauthGithubController@getUserInstallations');
 Route::get('/oauth-github/get-user-repos', 'OauthGithubController@getUserRepos');
+Route::get('/oauth-github/get-user-orgs', 'OauthGithubController@getUserOrgs');
 Route::get('/oauth-github/get-owner-repo', 'OauthGithubController@getOwnerRepo');
 Route::get('/oauth-github/get-repo-pulls', 'OauthGithubController@getRepoPulls');
 Route::get('/oauth-github/set-push-hooks', 'OauthGithubController@setPushHooks');
@@ -49,4 +50,4 @@ Route::get('/oauth-github/get-commits', 'OauthGithubController@getCommits');
 Route::get('/oauth-github/get-single-commit', 'OauthGithubController@getSingleCommit');
 
 Route::get('/dashboard-raw', 'UsersController@dashboard');
-Route::get('/dashboard', 'OauthGithubController@getUserRepos');
+Route::get('/dashboard', 'OauthGithubController@getUserOrgs');

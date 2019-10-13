@@ -130,6 +130,28 @@ class OauthGithubController extends Controller
         return view('dark.dashboard', ['repos' => $repos]);
     }
 
+    public function getUserOrgs(Request $request)
+    {
+        $_orgs = $this->http->request(
+            'GET',
+            "https://api.github.com/user/orgs",
+            [
+                'headers' => [
+                    'Authorization' => "Bearer {$this->curlGithubToken}",
+                    'Accept' => 'application/vnd.github.machine-man-preview+json'
+                ]
+            ]
+        )->getBody();
+        $orgs = [];
+        $_orgs = json_decode($_orgs, true);
+        if(!empty($_orgs) && is_array($_orgs)) {
+            foreach($_orgs as $_org) {
+                $orgs[$_org['login']][] = $_org['avatar_url'];
+            }
+        }
+        return view('dark.dashboard', ['orgs' => $orgs]);
+    }
+
     public function getOwnerRepo(Request $request)
     {
         $this->requestData = $request->all();
