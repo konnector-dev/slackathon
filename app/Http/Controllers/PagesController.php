@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class PagesController extends Controller
 {
-    public function login() {
+    public function login()
+    {
         return response()->view('/login/login', [], 200);
     }
 }

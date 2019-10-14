@@ -34,11 +34,11 @@ class OauthGithubController extends Controller
 
     private function accessTokenChecker($path)
     {
-        if(in_array($path, $this->allowedPath)) {
+        if (in_array($path, $this->allowedPath)) {
             return;
         }
         if (!isset($this->requestData['access_token'])) {
-            $url = (url('/').'/oauth-github/auth-request');
+            $url = (url('/') . '/oauth-github/auth-request');
             return \Redirect::to($url)->send();
         }
         if (!strlen($this->requestData['access_token'])) {
@@ -57,7 +57,8 @@ class OauthGithubController extends Controller
         return redirect($url);
     }
 
-    private function getScopes() {
+    private function getScopes()
+    {
         $scopes = [
             'repo:status',
             'repo_deployment',
@@ -112,7 +113,7 @@ class OauthGithubController extends Controller
     {
         return $this->http->request(
             'GET',
-            "https://api.github.com/user/repos",
+            'https://api.github.com/user/repos',
             [
                 'headers' => [
                     'Authorization' => "Bearer {$this->curlGithubToken}",
@@ -126,7 +127,7 @@ class OauthGithubController extends Controller
     {
         return $this->http->request(
             'GET',
-            "https://api.github.com/user/orgs",
+            'https://api.github.com/user/orgs',
             [
                 'headers' => [
                     'Authorization' => "Bearer {$this->curlGithubToken}",
