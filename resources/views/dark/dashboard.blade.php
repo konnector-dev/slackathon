@@ -33,7 +33,7 @@ foreach ($orgs as $org_name => $org_avatar) {
                 class="fas fa-sign-out-alt mx-3"></i><i class="fa fa-caret-right d-none position-absolute"></i><span
                 class="text-nowrap mx-2">Log out</span></a></li>
 </ul>
-<div class="container article-clean" style="background-color: #1F2327;font-family: Ubuntu, sans-serif;">
+<div class="container-fluid article-clean" style="background-color: #1F2327;font-family: Ubuntu, sans-serif;">
     @include('dark.top-nav')
     <div class="row">
         <div class="col" style="margin: 5px;padding: 0px;">
