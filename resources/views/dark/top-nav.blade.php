@@ -1,7 +1,8 @@
 <nav class="navbar navbar-light navbar-expand-md navbar-dark">
     <div class="container-fluid">
         <div>
-            <a class="navbar-brand" href="#"><?php echo $org_first; ?></a>
+            <a class="navbar-brand" alt="Dashboard" title="Dashboard"
+                href="<?php echo url()->full(); ?>">Dashboard</a>
         </div>
         <div class="collapse navbar-collapse" id="navcol-2">
             <ul class="nav navbar-nav ml-auto" id="desktop-toolbar">
@@ -14,9 +15,10 @@
                             width="25px" height="25px"> <?php echo @$user['login'] ?> <i
                             class="fa fa-chevron-down fa-fw"></i></a>
                     <div class="dropdown-menu" role="menu">
-                        <a class="dropdown-item" role="presentation" href="#">
-                            <i class="fa fa-user fa-fw"></i> Profile</a>
-                        <a class="dropdown-item" role="presentation" href="#">
+                        <!-- <a class="dropdown-item" role="presentation" href="#">
+                            <i class="fa fa-user fa-fw"></i> Profile</a> -->
+                        <a class="dropdown-item" role="presentation"
+                            href="<?php echo url('/logout'); ?>">
                             <i class="fa fa-power-off fa-fw"></i>Logout </a></div>
                 </li>
             </ul>

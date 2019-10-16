@@ -15,8 +15,8 @@ class OauthGithubController extends Controller
     private $curlGithubHeaders = [];
     private $curlGithubPostdata = [];
     private $requestData = [];
-    private $owner = 'konnector-dev';
-    private $repo = 'kode';
+    private $owner = 'jdecode';
+    private $repo = 'code';
     private $isPostJson = false;
     private $http;
     private $allowedPath = [
@@ -83,11 +83,20 @@ class OauthGithubController extends Controller
             ];
             $this->curlGithubUrl = 'https://github.com/login/oauth/access_token';
             $this->setCurlGithubPost($postvars);
-            $output = $this->curlGithub();
-            return redirect(url('/dashboard?') . $output);
+            return redirect(url('/dashboard?') . $this->getTokenFromParams($this->curlGithub()));
         }
-
         return $github_return;
+    }
+
+    private function getTokenFromParams($params)
+    {
+        $_params = explode('&', $params);
+        foreach ($_params as $_param) {
+            if (stristr($_param, 'access_token=')) {
+                return $_param;
+            }
+        }
+        return '';
     }
 
     public function getUserInfo(Request $request)
@@ -139,12 +148,30 @@ class OauthGithubController extends Controller
 
     public function getOwnerRepo(Request $request)
     {
-        $this->requestData = $request->all();
-        $this->accessTokenChecker($this->requestData);
-        $this->curlGithubToken = $this->requestData['access_token'];
-        $this->curlGithubUrl = "https://api.github.com/repos/{$this->owner}/{$this->repo}";
-        $this->setCurlGithubHeaders('Accept: application/vnd.github.machine-man-preview+json');
-        return $this->curlGithub();
+        return $this->http->request(
+            'GET',
+            'https://api.github.com/repos/' . ($this->requestData['owner'] ?? $this->owner) . '/' . ($this->requestData['repo'] ?? $this->repo),
+            [
+                'headers' => [
+                    'Authorization' => "Bearer {$this->curlGithubToken}",
+                    'Accept' => 'application/vnd.github.machine-man-preview+json'
+                ]
+            ]
+        )->getBody();
+    }
+
+    public function getOwnerRepos(Request $request)
+    {
+        return $this->http->request(
+            'GET',
+            'https://api.github.com/orgs/' . ($this->requestData['owner'] ?? $this->owner) . '/repos',
+            [
+                'headers' => [
+                    'Authorization' => "Bearer {$this->curlGithubToken}",
+                    'Accept' => 'application/vnd.github.baptiste-preview+json'
+                ]
+            ]
+        )->getBody();
     }
 
     public function getRepoPulls(Request $request)
@@ -159,11 +186,15 @@ class OauthGithubController extends Controller
 
     public function getCommits(Request $request)
     {
-        $this->requestData = $request->all();
-        $this->accessTokenChecker($this->requestData);
-        $this->curlGithubToken = $this->requestData['access_token'];
-        $this->curlGithubUrl = "https://api.github.com/repos/{$this->owner}/{$this->repo}/commits";
-        return $this->curlGithub();
+        return $this->http->request(
+            'GET',
+            'https://api.github.com/repos/' . ($this->requestData['owner'] ?? $this->owner) . '/' . ($this->requestData['repo'] ?? $this->repo) . '/commits',
+            [
+                'headers' => [
+                    'Authorization' => "Bearer {$this->curlGithubToken}",
+                ]
+            ]
+        )->getBody();
     }
 
     public function getSingleCommit(Request $request)

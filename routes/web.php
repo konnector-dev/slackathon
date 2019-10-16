@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', 'PagesController@login');
+Route::get('/login', 'UsersController@login');
+Route::get('/logout', 'UsersController@logout');
 
 /**
  * Github App Auth URLs (probably not going to be used)
@@ -44,10 +45,15 @@ Route::get('/oauth-github/get-user-installations', 'OauthGithubController@getUse
 Route::get('/oauth-github/get-user-repos', 'OauthGithubController@getUserRepos');
 Route::get('/oauth-github/get-user-orgs', 'OauthGithubController@getUserOrgs');
 Route::get('/oauth-github/get-owner-repo', 'OauthGithubController@getOwnerRepo');
+Route::get('/oauth-github/get-owner-repos', 'OauthGithubController@getOwnerRepos');
 Route::get('/oauth-github/get-repo-pulls', 'OauthGithubController@getRepoPulls');
 Route::get('/oauth-github/set-push-hooks', 'OauthGithubController@setPushHooks');
 Route::get('/oauth-github/get-commits', 'OauthGithubController@getCommits');
 Route::get('/oauth-github/get-single-commit', 'OauthGithubController@getSingleCommit');
 
 Route::get('/dashboard', 'UsersController@dashboard');
+Route::get('/organizations', 'UsersController@dashboard');
+Route::get('/projects', 'UsersController@projects');
+Route::get('/commits', 'UsersController@commits');
+
 Route::get('/dashboard-bad', 'OauthGithubController@getUserOrgs');
