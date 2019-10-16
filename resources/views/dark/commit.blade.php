@@ -45,13 +45,19 @@
                     text-overflow: '';">
                 <div style="padding-left: 3em;">
                     <strong>
-                    <a 
+                        <a 
                         class="text-white"
                         href="<?php
                             echo url('/projects?owner=' . app('request')->input('owner') . '&access_token=' . app('request')->input('access_token'));
                         ?>">
                         {{app('request')->input('owner')}}</a> > 
-                        {{app('request')->input('repo')}}</strong>:</div>
+                        <a 
+                        class="text-white"
+                        href="<?php
+                            echo url('/commits?owner=' . app('request')->input('owner') . '&repo=' . app('request')->input('repo') . '&access_token=' . app('request')->input('access_token'));
+                        ?>">
+                        {{app('request')->input('repo')}}</a> > 
+                        {{ $commit['commit']['message'] }}</strong>:</div>
             </div>
         </div>
     </div>
@@ -61,55 +67,31 @@
         <div class="col">
             <div class="row user-list">
                 <?php
-                foreach ($commits as $commit) {
+                foreach ($commit['files'] as $file) {
                     ?>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 user-item">
-                    <div 
-                        class="border rounded border-dark shadow-none user-container" 
+                    <div
+                        class="border rounded border-dark shadow-none user-container"
                         style="background-color: #212529;">
-                        <a 
-                            class="user-avatar" 
-                            target="_blank" 
-                            href="<?php echo $commit['author_url']; ?>">
-                            <img 
-                                class="rounded-circle img-fluid" 
-                                src="<?php echo $commit['author_avatar'] ?>" 
-                                width="48" 
-                                height="48" 
-                                alt="<?php echo $commit['author'] ?>">
-                        </a>
-                        <p 
-                            class="float-sm-left float-md-left float-lg-left float-xl-left user-name">
-                            <a 
-                                href="<?php echo url('/commit?') . 'owner=' . app('request')->input('owner') . '&repo=' . app('request')->input('repo') . '&commit-sha=' . $commit['sha'] . '&access_token=' . app('request')->input('access_token'); ?>" 
-                                style="color: #dbe3e7;"><?php echo $commit['message'] ?>
+                        <p
+                            class="float-sm-left float-md-left float-lg-left float-xl-left user-name"
+                            style="margin: 19px 10px;">
+                            <a
+                                href="#"
+                                style="color: #dbe3e7;">
+                                <?php echo $file['filename'] ?>
+                                <span 
+                                    class="badge badge-success text-white" 
+                                    style="
+                                        display:inline-block;
+                                        font-size:12px;">+<?php echo $file['additions'] ?></span>
+                                <span 
+                                    class="badge badge-danger text-white" 
+                                    style="
+                                        display:inline-block;
+                                        font-size:12px;">-<?php echo $file['deletions'] ?></span>
                             </a>
-                            <span title="{{ Carbon\Carbon::parse($commit['time'])->format('F d, Y H:i:s A') }}">
-                            {{ Carbon\Carbon::parse($commit['time'])->diffForHumans() }}
-                            </span>
                         </p>
-                        <a 
-                            class="btn btn-dark btn-lg text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
-                            role="button" 
-                            target="_blank" 
-                            style="
-                                margin: 11px 0px 0px;
-                                background-color: #444f51;
-                                color: #dbe3e7;
-                                cursor:pointer;" 
-                            href="<?php echo $commit['html_url']; ?>"><?php echo substr($commit['sha'], 0, 6) ?>
-                        </a>
-                        <a 
-                            class="btn btn-dark btn-sm text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
-                            role="button" 
-                            style="
-                                margin: 19px 0px 0px;
-                                background-color: #444f51;
-                                color: #dbe3e7;
-                                margin-right: 30%;
-                                cursor:pointer;" 
-                            href="#">Pending
-                        </a>
                     </div>
                 </div>
                 <?php

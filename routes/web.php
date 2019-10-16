@@ -55,5 +55,6 @@ Route::get('/dashboard', 'UsersController@dashboard');
 Route::get('/organizations', 'UsersController@dashboard');
 Route::get('/projects', 'UsersController@projects');
 Route::get('/commits', 'UsersController@commits');
+Route::get('/commit', 'UsersController@commit');
 
 Route::get('/dashboard-bad', 'OauthGithubController@getUserOrgs');

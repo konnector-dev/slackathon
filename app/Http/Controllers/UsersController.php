@@ -67,13 +67,23 @@ class UsersController extends Controller
             foreach ($_commits as $_commit) {
                 $commits[$_commit['sha']] = [
                     'sha' => $_commit['sha'],
+                    'html_url' => $_commit['html_url'],
                     'author' => $_commit['commit']['author']['name'],
                     'author_avatar' => $_commit['author']['avatar_url'],
+                    'author_url' => $_commit['author']['html_url'],
                     'message' => $_commit['commit']['message'],
                     'time' => $_commit['commit']['author']['date'],
+                    'verified' => $_commit['commit']['verification']['verified'],
                 ];
             }
         }
         return view('dark.commits', ['commits' => $commits, 'user' => $this->userInfo()]);
+    }
+
+    public function commit()
+    {
+        $_commit = app('App\Http\Controllers\OauthGithubController')->getSingleCommit($this->request);
+        $commit = json_decode($_commit, true);
+        return view('dark.commit', ['commit' => $commit, 'user' => $this->userInfo()]);
     }
 }

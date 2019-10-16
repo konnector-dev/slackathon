@@ -201,16 +201,17 @@ class OauthGithubController extends Controller
     {
         $commit = $this->http->request(
             'GET',
-            "https://api.github.com/repos/{$this->owner}/{$this->repo}/commits/{$this->requestData['commit-sha']}",
+            'https://api.github.com/repos/' . ($this->requestData['owner'] ?? $this->owner) . '/' . ($this->requestData['repo'] ?? $this->repo) . '/commits' . '/' . ($this->requestData['commit-sha'] ?? ''),
             [
                 'headers' => [
                     'Authorization' => "Bearer {$this->curlGithubToken}"
                 ]
             ]
         )->getBody();
-        $ar = json_decode($commit, true);
-        unset($ar['files']);
-        return $ar;
+        return $commit;
+        //$ar = json_decode($commit, true);
+        //unset($ar['files']);
+        //return json_encode($ar);
     }
 
     public function setPushHooks(Request $request)
