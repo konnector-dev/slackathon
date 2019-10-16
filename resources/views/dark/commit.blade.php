@@ -3,6 +3,7 @@
 @section('content')
 
 <link rel="stylesheet" href="{{  url('/assets/css/Pretty-User-List.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
+<link rel="stylesheet" href="{{  url('/assets/css/diff2html.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
 
 <ul class="nav flex-column shadow d-flex sidebar mobile-hid" style="background-color: #16181c;">
     <li class="nav-item logo-holder">
@@ -67,6 +68,7 @@
         <div class="col">
             <div class="row user-list">
                 <?php
+                $file_counter = 1;
                 foreach ($commit['files'] as $file) {
                     ?>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 user-item">
@@ -92,6 +94,16 @@
                                         font-size:12px;">-<?php echo $file['deletions'] ?></span>
                             </a>
                         </p>
+                        <div class="code-viewer" id="<?php echo 'p-' . $file_counter; ?>">
+                        </div>
+                        <script>
+                            var diffHtml = Diff2Html.getPrettyHtml(
+                            <?php echo json_encode($file['patch']); ?>,
+                            {inputFormat: 'diff', showFiles: true, matching: 'words', outputFormat: 'line-by-line'}
+                            );
+                            document.getElementById("p-<?php echo $file_counter; ?>").innerHTML = diffHtml;
+                            </script>
+                    <?php $file_counter++; ?>
                     </div>
                 </div>
                 <?php

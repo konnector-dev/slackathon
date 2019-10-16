@@ -17,13 +17,15 @@
     <link rel="stylesheet" href="{{  url('/assets/css/Navbar---App-Toolbar--LG--MD---Mobile-Nav--SM--XS-1.css?h=b4372e30ee0ff9df0ff2c3b6a97f8fbe') }}">
     <link rel="stylesheet" href="{{  url('/assets/css/Navbar---App-Toolbar--LG--MD---Mobile-Nav--SM--XS.css?h=aae3419df085143f87b3b5231596e45f') }}">
 
+    <script src="{{  url('/assets/js/jquery.min.js') }}"></script>
+    <script src="{{  url('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{  url('/assets/js/sidebar.js?h=5698962290ef9fcb7ad2ffc60db8773a') }}"></script>
+    <script src="{{  url('/assets/js/diff2html.js') }}"></script>
+
 </head>
 
 <body>
     @yield('content')
-    <script src="{{  url('/assets/js/jquery.min.js') }}"></script>
-    <script src="{{  url('/assets/bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{  url('/assets/js/sidebar.js?h=5698962290ef9fcb7ad2ffc60db8773a') }}"></script>
 </body>
 
 </html>

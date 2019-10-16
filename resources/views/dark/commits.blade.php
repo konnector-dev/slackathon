@@ -76,6 +76,7 @@
                                 src="<?php echo $commit['author_avatar'] ?>" 
                                 width="48" 
                                 height="48" 
+                                title="<?php echo $commit['author'] ?>"
                                 alt="<?php echo $commit['author'] ?>">
                         </a>
                         <p 
@@ -85,12 +86,13 @@
                                 style="color: #dbe3e7;"><?php echo $commit['message'] ?>
                             </a>
                             <span title="{{ Carbon\Carbon::parse($commit['time'])->format('F d, Y H:i:s A') }}">
-                            {{ Carbon\Carbon::parse($commit['time'])->diffForHumans() }}
+                            <?php echo '<strong>' . $commit['author'] . '</strong> commited ' . Carbon\Carbon::parse($commit['time'])->diffForHumans(); ?>
                             </span>
                         </p>
                         <a 
                             class="btn btn-dark btn-lg text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
                             role="button" 
+                            title="View this on GitHub (opens in new tab/window)" 
                             target="_blank" 
                             style="
                                 margin: 11px 0px 0px;
@@ -102,13 +104,15 @@
                         <a 
                             class="btn btn-dark btn-sm text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
                             role="button" 
+                            title="View GitHub JSON (opens in new tab/window)" 
+                            target="_blank" 
                             style="
                                 margin: 19px 0px 0px;
                                 background-color: #444f51;
                                 color: #dbe3e7;
                                 margin-right: 30%;
                                 cursor:pointer;" 
-                            href="#">Pending
+                            href="<?php echo $commit['url']; ?>">Pending
                         </a>
                     </div>
                 </div>

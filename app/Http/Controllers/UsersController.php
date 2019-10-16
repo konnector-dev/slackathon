@@ -67,6 +67,7 @@ class UsersController extends Controller
             foreach ($_commits as $_commit) {
                 $commits[$_commit['sha']] = [
                     'sha' => $_commit['sha'],
+                    'url' => $_commit['url'],
                     'html_url' => $_commit['html_url'],
                     'author' => $_commit['commit']['author']['name'],
                     'author_avatar' => $_commit['author']['avatar_url'],
