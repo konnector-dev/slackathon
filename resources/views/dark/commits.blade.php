@@ -1,12 +1,9 @@
 @extends('layout/reviewee-dark-dashboard')
 @section('title', 'Projects')
 @section('content')
-<?php
-$commits_list = '';
-foreach ($commits as $commit_owner => $commit_name) {
-    $commits_list .= '<li class="commit-projects" style="list-style: none; margin-top: 18px;"><a class="text-white" href="' . url("/commits?owner={$commit_name['owner']}&commit={$commit_name['name']}&access_token=" . app('request')->input('access_token')) . "\">{$commit_name['name']}" . '</a></li>';
-}
-?>
+
+<link rel="stylesheet" href="{{  url('/assets/css/Pretty-User-List.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
+
 <ul class="nav flex-column shadow d-flex sidebar mobile-hid" style="background-color: #16181c;">
     <li class="nav-item logo-holder">
         <div class="text-center text-white logo py-4 mx-4">
@@ -48,13 +45,69 @@ foreach ($commits as $commit_owner => $commit_name) {
                     text-overflow: '';">
                 <div style="padding-left: 3em;">
                     <strong>{{app('request')->input('owner')}}/{{app('request')->input('repo')}}</strong>:</div>
-                <ul style="padding-left: 4em;">
-                    <?php echo $commits_list; ?>
-                </ul>
             </div>
         </div>
     </div>
     <div class="row">
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="row user-list">
+                <?php
+                foreach ($commits as $commit) {
+                    ?>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 user-item">
+                    <div 
+                        class="border rounded border-dark shadow-none user-container" 
+                        style="background-color: #212529;">
+                        <a 
+                            class="user-avatar" 
+                            href="#">
+                            <img 
+                                class="rounded-circle img-fluid" 
+                                src="<?php echo $commit['author_avatar'] ?>" 
+                                width="48" 
+                                height="48" 
+                                alt="<?php echo $commit['author'] ?>">
+                        </a>
+                        <p 
+                            class="float-sm-left float-md-left float-lg-left float-xl-left user-name">
+                            <a 
+                                href="#" 
+                                style="color: #dbe3e7;"><?php echo $commit['message'] ?>
+                            </a>
+                            <span title="{{ Carbon\Carbon::parse($commit['time'])->format('F d, Y H:i:s A') }}">
+                            {{ Carbon\Carbon::parse($commit['time'])->diffForHumans() }}
+                            </span>
+                        </p>
+                        <a 
+                            class="btn btn-dark btn-lg text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
+                            role="button" 
+                            style="
+                                margin: 11px 0px 0px;
+                                background-color: #444f51;
+                                color: #dbe3e7;
+                                cursor:pointer;" 
+                            href="#"><?php echo substr($commit['sha'], 0, 6) ?>
+                        </a>
+                        <a 
+                            class="btn btn-dark btn-sm text-white-50 bg-dark border rounded border-dark shadow-none float-sm-right float-md-right float-lg-right float-xl-right"
+                            role="button" 
+                            style="
+                                margin: 19px 0px 0px;
+                                background-color: #444f51;
+                                color: #dbe3e7;
+                                margin-right: 30%;
+                                cursor:pointer;" 
+                            href="#">Pending
+                        </a>
+                    </div>
+                </div>
+                <?php
+                }
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

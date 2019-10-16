@@ -65,7 +65,13 @@ class UsersController extends Controller
         $_commits = json_decode($_commits, true);
         if (!empty($_commits) && is_array($_commits)) {
             foreach ($_commits as $_commit) {
-                $commits[$_commit['full_name']] = $_commit['name'];
+                $commits[$_commit['sha']] = [
+                    'sha' => $_commit['sha'],
+                    'author' => $_commit['commit']['author']['name'],
+                    'author_avatar' => $_commit['author']['avatar_url'],
+                    'message' => $_commit['commit']['message'],
+                    'time' => $_commit['commit']['author']['date'],
+                ];
             }
         }
         return view('dark.commits', ['commits' => $commits, 'user' => $this->userInfo()]);
