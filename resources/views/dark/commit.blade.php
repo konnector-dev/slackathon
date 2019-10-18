@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="{{  url('/assets/css/Pretty-User-List.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
 <link rel="stylesheet" href="{{  url('/assets/css/diff2html.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
+<link rel="stylesheet" href="{{  url('/assets/css/github.min.css?h=8de3d97f44fc1fd45832f5937b255e4e') }}">
 
 <ul class="nav flex-column shadow d-flex sidebar mobile-hid" style="background-color: #16181c;">
     <li class="nav-item logo-holder">
@@ -13,7 +14,9 @@
                 title="<?php echo ENV('APP_NAME', 'Koderview') ?>"
                 alt="<?php echo ENV('APP_NAME', 'Koderview') ?>"
                 href="<?php echo url()->full(); ?>">
-                <strong><?php echo ENV('APP_NAME', 'Koderview') ?></strong></a><a
+                <strong><?php echo ENV('APP_NAME', 'Koderview') ?></strong>
+            </a>
+            <a
                 class="text-white float-right" id="sidebarToggleHolder" href="#">
                 <i class="fas fa-bars" id="sidebarToggle"></i></a></div>
     </li>
