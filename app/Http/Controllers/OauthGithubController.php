@@ -8,15 +8,25 @@ use GuzzleHttp\Client;
 class OauthGithubController extends Controller {
 
 	private $hashBabyHash = 'whatislovebabydonthurtme';
+
 	private $curlGithubUrl = '';
+
 	private $curlGithubToken = '';
+
 	private $curlGithubHeaders = [];
+
 	private $curlGithubPostdata = [];
+
 	private $requestData = [];
+
 	private $owner = 'jdecode';
+
 	private $repo = 'code';
+
 	private $isPostJson = false;
+
 	private $http;
+
 	private $allowedPath = [
 		'oauth-github/auth-request',
 		'oauth-github/auth'
@@ -108,7 +118,7 @@ class OauthGithubController extends Controller {
 		return $this->curlGithub();
 	}
 
-	public function getUserRepos(Request $request) {
+	public function getUserRepos() {
 		return $this->http->request(
 						'GET',
 						'https://api.github.com/user/repos',
