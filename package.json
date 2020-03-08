@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/konnector-dev/slackathon/issues"
   },
-  "homepage": "https://github.com/konnector-dev/slackathon#readme"
+  "homepage": "https://github.com/konnector-dev/slackathon#readme",
+  "dependencies": {
+    "tailwindcss": "^1.2.0"
+  }
 }
