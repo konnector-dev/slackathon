@@ -65,6 +65,25 @@ $routes->scope('/', function (RouteBuilder $builder) {
     //$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 't']);
 
+    $builder->connect('/oauth-github/auth-request', ['controller' => 'OauthGithubController', 'action' => 'sendToGithubAuth']);
+    $builder->connect('/oauth-github/auth', ['controller' => 'OauthGithubController', 'action' => 'getAccessTokenFromCode']);
+    $builder->connect('/oauth-github/get-user-info', ['controller' => 'OauthGithubController', 'action' => 'getUserInfo']);
+    $builder->connect('/oauth-github/get-user-installations', ['controller' => 'OauthGithubController', 'action' => 'getUserInstallations']);
+    $builder->connect('/oauth-github/get-user-repos', ['controller' => 'OauthGithubController', 'action' => 'getUserRepos']);
+    $builder->connect('/oauth-github/get-user-orgs', ['controller' => 'OauthGithubController', 'action' => 'getUserOrgs']);
+    $builder->connect('/oauth-github/get-owner-repo', ['controller' => 'OauthGithubController', 'action' => 'getOwnerRepo']);
+    $builder->connect('/oauth-github/get-owner-repos', ['controller' => 'OauthGithubController', 'action' => 'getOwnerRepos']);
+    $builder->connect('/oauth-github/get-repo-pulls', ['controller' => 'OauthGithubController', 'action' => 'getRepoPulls']);
+    $builder->connect('/oauth-github/set-push-hooks', ['controller' => 'OauthGithubController', 'action' => 'setPushHooks']);
+    $builder->connect('/oauth-github/get-commits', ['controller' => 'OauthGithubController', 'action' => 'getCommits']);
+    $builder->connect('/oauth-github/get-single-commit', ['controller' => 'OauthGithubController', 'action' => 'getSingleCommit']);
+
+    $builder->connect('/dashboard', ['controller' => 'UsersController', 'action' => 'dashboard']);
+    $builder->connect('/organizations', ['controller' => 'UsersController', 'action' => 'dashboard']);
+    $builder->connect('/projects', ['controller' => 'UsersController', 'action' => 'projects']);
+    $builder->connect('/commits', ['controller' => 'UsersController', 'action' => 'commits']);
+    $builder->connect('/commit', ['controller' => 'UsersController', 'action' => 'commit']);
+
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */
